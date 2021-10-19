@@ -3,8 +3,7 @@ import {
   POPULAR_BASE_URL,
   API_URL,
   API_KEY,
-  REQUEST_TOKEN_URL,
-  SESSION_ID_URL
+  
 } from './config';
 
 const defaultConfig = {
@@ -30,34 +29,7 @@ const apiSettings = {
     return await (await fetch(creditsEndpoint)).json();
   },
   // Bonus material below for login
-  getRequestToken: async () => {
-    const reqToken = await (await fetch(REQUEST_TOKEN_URL)).json();
-    return reqToken.request_token;
-  },
-  authenticate: async (requestToken, username, password) => {
-    const bodyData = {
-      username,
-      password,
-      request_token: requestToken
-    };
-    // First authenticate the requestToken
-    const data = await (
-      await fetch(LOGIN_URL, {
-        ...defaultConfig,
-        body: JSON.stringify(bodyData)
-      })
-    ).json();
-    // Then get the sessionId with the requestToken
-    if (data.success) {
-      const sessionId = await (
-        await fetch(SESSION_ID_URL, {
-          ...defaultConfig,
-          body: JSON.stringify({ request_token: requestToken })
-        })
-      ).json();
-      return sessionId;
-    }
-  },
+  
   rateMovie: async (sessionId, movieId, value) => {
     const endpoint = `${API_URL}movie/${movieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`;
 
