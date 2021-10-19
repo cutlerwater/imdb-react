@@ -18,13 +18,7 @@ const Header = () => {
         <Link to='/'>
           <LogoImg src={RMDBLogo} alt='rmdb-logo' />
         </Link>
-        {user ? (
-          <span>Logged in as: {user.username}</span>
-        ) : (
-          <Link to='/login'>
-            <span>Log in</span>
-          </Link>
-        )}
+        
         <TMDBLogoImg src={TMDBLogo} alt='tmdb-logo' />
       </Content>
     </Wrapper>
